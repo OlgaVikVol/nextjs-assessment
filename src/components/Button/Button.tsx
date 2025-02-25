@@ -26,7 +26,7 @@ export const Button = ({
             [styles.down]: arrow === 'down',
           })}
         >
-          <ArrowIcon />
+          <ArrowIcon/>
         </span>
       )}
     </button>

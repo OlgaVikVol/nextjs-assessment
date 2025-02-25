@@ -4,14 +4,33 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   webpack(config) {
     config.module.rules.push({
-      test: /\.svg$/i,
+      test: /\.svg$/,
       issuer: /\.[jt]sx?$/,
       use: [
         {
           loader: '@svgr/webpack',
+          options: {
+            icon: true, 
+            svgo: true,
+            svgoConfig: {
+              plugins: [
+                {
+                  name: 'preset-default',
+                  params: {
+                    override: {
+                      removeViewBox: false, 
+                    },
+                  },
+                },
+              ],
+            },
+            titleProp: true,
+            ref: true, 
+          },
         },
       ],
     });
+
     return config;
   },
 };
