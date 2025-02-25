@@ -1,24 +1,22 @@
 {
-	"root": true,
-	"parser" : "@typescript-eslint/parser",
-	"plugins" : [
-		"@typescript-eslint"
-	],
-	"rules": {
-		"semi": "off",
-		"@typescript-eslint/semi": [
-			"warn"
-		],
-		"@typescript-eslint/no-empty-interface": [
-			"error",
-			{
-				"allowSingleExtends": true
-			}
-		]
-	},
-	"extends": [
-		"eslint:recommended",
-		"plugin:@typescript-eslint/eslint-recommended",
-		"plugin:@typescript-eslint/recommended"
-	]
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "simple-import-sort"],
+  "rules": {
+    "semi": "off",
+    "@typescript-eslint/semi": ["warn"],
+    "@typescript-eslint/no-empty-interface": [
+      "error",
+      {
+        "allowSingleExtends": true
+      }
+    ],
+    "simple-import-sort/imports": "warn",
+    "simple-import-sort/exports": "warn"
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ]
 }
