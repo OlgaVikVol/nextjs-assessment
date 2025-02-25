@@ -1,4 +1,4 @@
-import { Button, Htag, Paragraph } from '@/components';
+import { Button, Htag, Paragraph, Tag } from '@/components';
 import Head from 'next/head';
 
 export default function Home() {
@@ -16,6 +16,7 @@ export default function Home() {
         <Paragraph size='l'>Large</Paragraph>
         <Paragraph>Middle</Paragraph>
         <Paragraph size='s'>Small</Paragraph>
+        <Tag size='s' color="red">Tag</Tag>
       </div>
     </>
   );
