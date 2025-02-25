@@ -1,4 +1,4 @@
-import { Button, Htag } from '@/components';
+import { Button, Htag, Paragraph } from '@/components';
 import Head from 'next/head';
 
 export default function Home() {
@@ -13,6 +13,9 @@ export default function Home() {
       <div>
         <Htag tag="h1">Home </Htag>
         <Button appearance='primary' arrow='down'>Add me</Button>
+        <Paragraph size='l'>Large</Paragraph>
+        <Paragraph>Middle</Paragraph>
+        <Paragraph size='s'>Small</Paragraph>
       </div>
     </>
   );
