@@ -1,7 +1,10 @@
 import { Button, Htag, Paragraph, Rating, Tag } from '@/components';
 import Head from 'next/head';
+import { useState } from 'react';
 
 export default function Home() {
+  const [rating, setRating] = useState(4); 
+
   return (
     <>
       <Head>
@@ -17,8 +20,8 @@ export default function Home() {
         <Paragraph>Middle</Paragraph>
         <Paragraph size='s'>Small</Paragraph>
         <Tag size='s' color="red">Tag</Tag>
-        <Rating rating={4}></Rating>
       </div>
+      <Rating rating={rating} isEditable setRating={setRating}></Rating>
     </>
   );
 }
