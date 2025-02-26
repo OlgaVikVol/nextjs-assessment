@@ -1,9 +1,10 @@
 import { Button, Htag, Paragraph, Rating, Tag } from '@/components';
+import { Layout } from '@/layout/Layout';
 import Head from 'next/head';
 import { useState } from 'react';
 
 export default function Home() {
-  const [rating, setRating] = useState(4); 
+  const [rating, setRating] = useState(4);
 
   return (
     <>
@@ -13,15 +14,19 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
+      <Layout>
         <Htag tag="h1">Home </Htag>
-        <Button appearance='primary' arrow='down'>Add me</Button>
-        <Paragraph size='l'>Large</Paragraph>
+        <Button appearance="primary" arrow="down">
+          Add me
+        </Button>
+        <Paragraph size="l">Large</Paragraph>
         <Paragraph>Middle</Paragraph>
-        <Paragraph size='s'>Small</Paragraph>
-        <Tag size='s' color="red">Tag</Tag>
-      </div>
-      <Rating rating={rating} isEditable setRating={setRating}></Rating>
+        <Paragraph size="s">Small</Paragraph>
+        <Tag size="s" color="red">
+          Tag
+        </Tag>
+        <Rating rating={rating} isEditable setRating={setRating}></Rating>
+      </Layout>
     </>
   );
 }
