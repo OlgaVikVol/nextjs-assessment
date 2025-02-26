@@ -1,9 +1,9 @@
 import { Button, Htag, Paragraph, Rating, Tag } from '@/components';
-import { Layout } from '@/layout/Layout';
+import { withLayout } from '@/layout/Layout';
 import Head from 'next/head';
 import { useState } from 'react';
 
-export default function Home() {
+function Home() {
   const [rating, setRating] = useState(4);
 
   return (
@@ -14,7 +14,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout>
+      <>
         <Htag tag="h1">Home </Htag>
         <Button appearance="primary" arrow="down">
           Add me
@@ -26,7 +26,9 @@ export default function Home() {
           Tag
         </Tag>
         <Rating rating={rating} isEditable setRating={setRating}></Rating>
-      </Layout>
+      </>
     </>
   );
 }
+
+export default withLayout(Home);
