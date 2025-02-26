@@ -15,6 +15,7 @@
     "simple-import-sort/exports": "warn"
   },
   "extends": [
+    "plugin:react-hooks/recommended",
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
