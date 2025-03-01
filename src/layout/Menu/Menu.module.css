@@ -1,0 +1,67 @@
+.first-level {
+  display: grid;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+  gap: 20px;
+  grid-template-columns: 24px 1fr;
+  line-height: 25px;
+  margin-top: 20px;
+}
+
+.first-level-list {
+  padding: 0;
+  list-style: none;
+}
+
+.first-level-active,
+.first-level:hover {
+  color: var(--primary);
+}
+
+.first-level-active svg,
+.first-level:hover svg {
+  fill: var(--primary);
+}
+
+.second-level {
+  padding: 0;
+  font-size: 12px;
+  color: var(--gray-dark);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 300;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.second-block {
+  padding: 0 0 0 32px;
+  border-left: 1px solid #dfdfdf;
+  list-style: none;
+  margin-left: 12px;
+  margin-top: 15px;
+}
+
+.second-level-block {
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+}
+
+.third-level {
+  display: block;
+  font-size: 14px;
+  color: var(--gray-dark);
+  cursor: pointer;
+  font-weight: 500;
+	list-style: none;
+  margin-bottom: 10px;
+  outline-offset: -1px;
+}
+
+.third-level-active,
+.third-level:hover {
+  color: var(--primary);
+}
