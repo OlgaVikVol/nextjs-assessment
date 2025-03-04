@@ -8,7 +8,7 @@ import Logo from '../logo.svg';
 export const Sidebar = ({ className, ...props }: SidebarProps) => {
   return (
     <div className={cn(styles.sidebar, className)} {...props}>
-      <Logo className={styles.logo} />
+      <Logo className={styles.logo} height="50px" width="170px" />
 
       <Menu />
     </div>

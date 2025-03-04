@@ -1,3 +1,8 @@
+.icon-wrapper svg {
+  width: 24px;
+  height: 20px;
+}
+
 .first-level {
   display: grid;
   align-items: center;
@@ -56,13 +61,13 @@
   color: var(--gray-dark);
   cursor: pointer;
   font-weight: 500;
-	list-style: none;
+  list-style: none;
   margin-bottom: 10px;
   outline-offset: -1px;
 }
 
 .third-block {
-  list-style: none; 
+  list-style: none;
   padding-left: 0;
 }
 

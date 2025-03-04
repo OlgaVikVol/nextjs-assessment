@@ -11,6 +11,7 @@ import cn from 'classnames';
 import styles from './Menu.module.css';
 import { FirstLevelMenuItem, PageItem } from '@/interfaces/menu.interface';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export const Menu = (): JSX.Element => {
   const { menu, firstCategory, setMenu } = useContext(AppContext);
@@ -50,7 +51,7 @@ export const Menu = (): JSX.Element => {
         {firstLevelMenu.map((m) => (
           <li key={m.route} aria-expanded={m.id === firstCategory}>
             <Link href={`/${m.route}`} className={styles['first-level']}>
-              {' '}
+              <span className={styles['icon-wrapper']}>{m.icon}</span>
               <span>{m.name}</span>
             </Link>
             {m.id === firstCategory && buildSecondLevel(m)}
