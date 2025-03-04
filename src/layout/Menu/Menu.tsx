@@ -6,7 +6,6 @@ import {
   useContext,
   useState,
   KeyboardEvent as ReactKeyboardEvent,
-  useEffect,
 } from 'react';
 import cn from 'classnames';
 import styles from './Menu.module.css';
@@ -17,18 +16,6 @@ export const Menu = (): JSX.Element => {
   const { menu, firstCategory, setMenu } = useContext(AppContext);
   const [announce, setAnnounce] = useState<'closed' | 'opened' | undefined>();
   const router = useRouter();
-
-  useEffect(() => {
-    if (setMenu) {
-      setMenu(
-        menu.map((m) => ({
-          ...m,
-          isOpened:
-            m.isOpened || m.pages.some((p) => router.asPath.includes(p.alias)),
-        }))
-      );
-    }
-  }, [router.asPath, setMenu]);
 
   const openSecondLevel = (secondCategory: string) => {
     if (setMenu) {
@@ -76,20 +63,29 @@ export const Menu = (): JSX.Element => {
   const buildSecondLevel = (menuItem: FirstLevelMenuItem) => {
     return (
       <ul className={styles['second-block']}>
-        {menu.map((m) => (
-          <li key={m._id.secondCategory}>
-            <button
-              onKeyDown={(key) => openSecondLevelKey(key, m._id.secondCategory)}
-              className={styles['second-level']}
-              onClick={() => openSecondLevel(m._id.secondCategory)}
-              aria-expanded={m.isOpened}
-            >
-              {m._id.secondCategory}
-            </button>
+        {menu.map((m) => {
+          if (
+            m.pages.map((p) => p.alias).includes(router.asPath.split('/')[2])
+          ) {
+            m.isOpened = true;
+          }
+          return (
+            <li key={m._id.secondCategory}>
+              <button
+                onKeyDown={(key) =>
+                  openSecondLevelKey(key, m._id.secondCategory)
+                }
+                className={styles['second-level']}
+                onClick={() => openSecondLevel(m._id.secondCategory)}
+                aria-expanded={m.isOpened}
+              >
+                {m._id.secondCategory}
+              </button>
 
-            {m.isOpened && buildThirdLevel(m.pages, menuItem.route)}
-          </li>
-        ))}
+              {m.isOpened && buildThirdLevel(m.pages, menuItem.route)}
+            </li>
+          );
+        })}
       </ul>
     );
   };
