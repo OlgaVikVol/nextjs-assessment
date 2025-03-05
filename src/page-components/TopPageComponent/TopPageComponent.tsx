@@ -1,6 +1,6 @@
 import { JSX } from 'react';
 import { TopPageComponentProps } from './TopPageComponent.props';
-import { Htag, Tag } from '@/components';
+import { Htag, Tag, JobVacancyStats } from '@/components';
 import styles from './TopPageComponent.module.css';
 import { TopLevelCategory } from '@/interfaces/page.interface';
 
@@ -26,11 +26,15 @@ export const TopPageComponent = ({
             <div key={product._id}>{product.title}</div>
           ))}
       </div>
-			<div className={styles["hh-title"]}>
-					<Htag tag='h2'>Vacancy - {page.category}</Htag>
-					<Tag color='red' size='m'>hh.ru</Tag>
-			</div>
-			{firstCategory === TopLevelCategory.Courses && page.hh && <></> }
+      <div className={styles['hh-title']}>
+        <Htag tag="h2">Vacancy - {page.category}</Htag>
+        <Tag color="red" size="m">
+          hh.ru
+        </Tag>
+      </div>
+      {firstCategory === TopLevelCategory.Courses && page.hh && (
+        <JobVacancyStats {...page.hh}></JobVacancyStats>
+      )}
     </div>
   );
 };

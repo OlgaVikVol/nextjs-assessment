@@ -1,0 +1,81 @@
+.hh {
+	display: grid;
+	gap: 30px;
+	grid-template-columns: 1fr 3fr;
+}
+
+.count {
+	padding: 20px;
+	text-align: center;
+}
+
+.salary {
+	display: grid;
+	padding: 20px;
+	gap: 20px 0;
+	grid-template-columns: 1fr 1fr 1fr;
+	text-align: center;
+}
+
+.salary > div {
+	border-right: 1px solid var(--gray-light);
+}
+
+.salary > div:last-child {
+	border-right: none;
+}
+
+.title {
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 27px;
+	margin-bottom: 10px;
+}
+
+.count-value {
+	font-size: 36px;
+	color: var(--primary);
+	font-weight: bold;
+	line-height: 49px;
+}
+
+.salary-value {
+	font-size: 26px;
+	font-weight: bold;
+	line-height: 35px;
+	margin-bottom: 10px;
+}
+
+.rate {
+	display: grid;
+	justify-content: center;
+	gap: 10px;
+	grid-template-columns: repeat(3, 20px);
+}
+
+.filled circle {
+	fill: var(--red);
+}
+
+@media screen and (width <= 1200px) {
+	.hh {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media screen and (width <= 640px) {
+	.salary {
+		grid-template-columns: 1fr;
+	}
+
+	.salary > div {
+		border-bottom: 1px solid var(--gray-light);
+		border-right: none;
+		padding-bottom: 20px;
+	}
+
+	.salary > div:last-child {
+		border-bottom: none;
+		padding-bottom: 0;
+	}
+}
