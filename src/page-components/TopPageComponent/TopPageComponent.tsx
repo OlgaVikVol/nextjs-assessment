@@ -3,6 +3,7 @@ import { TopPageComponentProps } from './TopPageComponent.props';
 import { Htag, Tag, JobVacancyStats } from '@/components';
 import styles from './TopPageComponent.module.css';
 import { TopLevelCategory } from '@/interfaces/page.interface';
+import { Advantages } from '@/components/Advantages/Advantages';
 
 export const TopPageComponent = ({
   page,
@@ -35,6 +36,24 @@ export const TopPageComponent = ({
       {firstCategory === TopLevelCategory.Courses && page.hh && (
         <JobVacancyStats {...page.hh}></JobVacancyStats>
       )}
+      {page.advantages && page.advantages.length > 0 && (
+        <>
+          <Htag tag="h2">Advantages</Htag>
+          <Advantages advantages={page.advantages} />
+        </>
+      )}
+      {page.seoText && (
+        <div
+          className={styles.seo}
+          dangerouslySetInnerHTML={{ __html: page.seoText }}
+        />
+      )}
+      <Htag tag="h2">Acquired skills</Htag>
+      {page.tags.map((tag) => (
+        <Tag key={tag} color="primary" size="m" className={styles.tag}>
+          {tag}
+        </Tag>
+      ))}
     </div>
   );
 };

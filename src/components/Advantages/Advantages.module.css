@@ -1,0 +1,22 @@
+.advantage {
+	display: grid;
+  align-items: center;
+  gap: 10px 40px;
+  grid-template-columns: 50px 1fr;
+  margin-bottom: 30px;
+}
+
+.title {
+  align-self: center;
+  font-weight: bold;
+}
+
+.vline {
+  border-left: 1px solid var(--gray-light);
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+	place-self: center;
+}

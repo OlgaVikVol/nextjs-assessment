@@ -35,6 +35,10 @@
   line-height: 27px;
 }
 
+.tag {
+  margin-bottom: 10px;
+}
+
 @media screen and (width <= 640px) {
   .title {
     grid-template-columns: auto 1fr;
