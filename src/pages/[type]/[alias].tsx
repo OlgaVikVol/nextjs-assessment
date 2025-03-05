@@ -6,12 +6,19 @@ import { TopLevelCategory, TopPageModel } from '@/interfaces/page.interface';
 import { ParsedUrlQuery } from 'querystring';
 import { ProductModel } from '@/interfaces/product.interface';
 import { firstLevelMenu } from '@/helpers/helpers';
+import { TopPageComponent } from '@/page-components';
 
-function Course({ menu, page, products }: CourseProps) {
-  return <>{products.length}</>;
+function TopPage({ firstCategory, page, products }: CourseProps) {
+  return (
+    <TopPageComponent
+      firstCategory={firstCategory}
+      page={page}
+      products={products}
+    />
+  );
 }
 
-export default withLayout(Course);
+export default withLayout(TopPage);
 
 /**
  * getStaticPaths - Prepares all possible paths for static generation.
@@ -69,7 +76,7 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({
       }
     );
 
-    if(menu.length === 0) {
+    if (menu.length === 0) {
       return {
         notFound: true,
       };

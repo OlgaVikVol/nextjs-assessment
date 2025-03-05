@@ -1,4 +1,6 @@
 .icon-wrapper svg {
+  display: flex;
+  justify-content: center;
   width: 24px;
   height: 20px;
 }
