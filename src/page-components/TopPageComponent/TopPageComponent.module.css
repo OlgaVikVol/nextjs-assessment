@@ -3,7 +3,7 @@
   gap: 20px;
   grid-template-columns: auto 1fr auto;
   margin-bottom: 30px;
-  place-items: baseline left;
+  place-items: center left;
 }
 
 .hh-title {
