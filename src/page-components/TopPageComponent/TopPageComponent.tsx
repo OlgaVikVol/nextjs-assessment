@@ -1,9 +1,10 @@
 import { JSX } from 'react';
 import { TopPageComponentProps } from './TopPageComponent.props';
-import { Htag, Tag, JobVacancyStats } from '@/components';
+import { Htag, Tag, JobVacancyStats, Sort } from '@/components';
 import styles from './TopPageComponent.module.css';
 import { TopLevelCategory } from '@/interfaces/page.interface';
 import { Advantages } from '@/components/Advantages/Advantages';
+import { SortEnum } from '@/components/Sort/Sort.props';
 
 export const TopPageComponent = ({
   page,
@@ -19,7 +20,7 @@ export const TopPageComponent = ({
             {products.length}
           </Tag>
         )}
-        <span>Sorting</span>
+        <Sort sort={SortEnum.Rating} setSort={() => {}} />
       </div>
       <div>
         {products &&
