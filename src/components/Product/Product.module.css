@@ -10,13 +10,14 @@
 
 .logo {
   grid-column: start / logoend;
-	grid-row: 1 / span 2;
+  grid-row: 1 / span 2;
 }
 
 .title,
 .tags {
   grid-column: titlestart / middle;
 }
+
 
 .price,
 .price-title {
@@ -32,13 +33,18 @@
 .rating,
 .rating-title {
   grid-column: ratestart / end;
-	white-space: nowrap;
+  white-space: nowrap;
 }
 
 .hr,
 .description,
 .actions {
   grid-column: start / end;
+}
+
+.actions {
+	display: flex;
+  gap: 20px;
 }
 
 .feature {

@@ -8,6 +8,7 @@ import { Tag } from '../Tag/Tag';
 import Image from 'next/image';
 import { Button } from '../Button/Button';
 import { priceUSD } from '@/helpers/helpers';
+import { Divider } from '../Divider/Divider';
 
 export const Product = forwardRef(
   (
@@ -17,37 +18,31 @@ export const Product = forwardRef(
     return (
       <div className={className} {...props} ref={ref}>
         <Card className={styles.product}>
-          <div>
+          <div className={styles.logo}>
             <Image
               className={styles.image}
               src={product.image}
               alt={product.title}
-              width={70}
-              height={70}
+              width={60}
+              height={60}
             />
           </div>
-          <div className={styles.title}>{product.title}</div>
+          <div className={styles.title}>
+            <span>{product.title}</span>
+          </div>
           <div className={styles.price}>
-            <span>
-              <span className="visualyHidden">price</span>
-              {priceUSD(product.price)}
-            </span>
+            <span>{priceUSD(product.price)}</span>
             {product.oldPrice && (
               <Tag className={styles['old-price']} color="green" size="m">
-                <span className="visualyHidden">скидка</span>
                 {priceUSD(product.price - product.oldPrice)}
               </Tag>
             )}
           </div>
           <div className={styles.credit}>
-            <span className="visualyHidden">кредит</span>
             {priceUSD(product.credit)}/<span className={styles.month}>мес</span>
           </div>
           <div className={styles.rating}>
-            <span className="visualyHidden">
-              {'рейтинг' + (product.reviewAvg ?? product.initialRating)}
-            </span>
-            <Rating rating={product.reviewAvg ?? product.initialRating} />
+            <Rating rating={product.reviewAvg || product.initialRating} />
           </div>
           <div className={styles.tags}>
             {product.categories.map((category) => (
@@ -59,24 +54,32 @@ export const Product = forwardRef(
           <div className={styles['price-title']}>Price</div>
           <div className={styles['credit-title']}>Credit</div>
           <div className={styles['rate-title']}>{product.reviewCount}</div>
-          <div className={styles.hr}>
-            <hr />{' '}
-          </div>
+          <Divider className={styles.hr} />
           <div className={styles.description}>{product.description}</div>
-          <div className={styles.feature}>feature</div>
+          <div className={styles.feature}>
+            {product.characteristics.map((c) => (
+              <div className={styles.characteristics} key={c.name}>
+                <span className={styles.characteristicsName}>{c.name}</span>
+                <span className={styles.characteristicsDots}></span>
+                <span className={styles.characteristicsValue}>{c.value}</span>
+              </div>
+            ))}
+          </div>
           <div className={styles['adv-block']}>
-            <div className={styles.advantages}>
-              <div>Advantges</div>
-              <div>{product.advantages}</div>
-            </div>
-            <div className={styles.disadvantages}>
-              <div>Disadvantages</div>
-              <div>{product.disadvantages}</div>
-            </div>
+            {product.advantages && (
+              <div className={styles.advantages}>
+                <div className={styles['adv-title']}>Преимущества</div>
+                <div>{product.advantages}</div>
+              </div>
+            )}
+            {product.disadvantages && (
+              <div className={styles.disadvantages}>
+                <div className={styles['adv-title']}>Недостатки</div>
+                <div>{product.disadvantages}</div>
+              </div>
+            )}
           </div>
-          <div className={styles.hr}>
-            <hr />{' '}
-          </div>
+          <Divider className={cn(styles.hr, styles.hr2)} />
           <div className={styles.actions}>
             <Button appearance="primary">Узнать подробнее</Button>
             <Button appearance="ghost" arrow={'right'}>
