@@ -7,6 +7,7 @@ import { Rating } from '../Rating/Rating';
 import { Tag } from '../Tag/Tag';
 import Image from 'next/image';
 import { Button } from '../Button/Button';
+import { priceUSD } from '@/helpers/helpers';
 
 export const Product = forwardRef(
   (
@@ -26,9 +27,26 @@ export const Product = forwardRef(
             />
           </div>
           <div className={styles.title}>{product.title}</div>
-          <div className={styles.price}>{product.price}</div>
-          <div className={styles.credit}>{product.credit}</div>
+          <div className={styles.price}>
+            <span>
+              <span className="visualyHidden">price</span>
+              {priceUSD(product.price)}
+            </span>
+            {product.oldPrice && (
+              <Tag className={styles['old-price']} color="green" size="m">
+                <span className="visualyHidden">скидка</span>
+                {priceUSD(product.price - product.oldPrice)}
+              </Tag>
+            )}
+          </div>
+          <div className={styles.credit}>
+            <span className="visualyHidden">кредит</span>
+            {priceUSD(product.credit)}/<span className={styles.month}>мес</span>
+          </div>
           <div className={styles.rating}>
+            <span className="visualyHidden">
+              {'рейтинг' + (product.reviewAvg ?? product.initialRating)}
+            </span>
             <Rating rating={product.reviewAvg ?? product.initialRating} />
           </div>
           <div className={styles.tags}>

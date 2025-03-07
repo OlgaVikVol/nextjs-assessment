@@ -10,7 +10,7 @@
 
 .logo {
   grid-column: start / logoend;
-  grid-row: 1 / span 2;
+	grid-row: 1 / span 2;
 }
 
 .title,
@@ -32,13 +32,13 @@
 .rating,
 .rating-title {
   grid-column: ratestart / end;
+	white-space: nowrap;
 }
 
 .hr,
 .description,
 .actions {
-  grid-column: ratestart / end;
-  white-space: nowrap;
+  grid-column: start / end;
 }
 
 .feature {
@@ -46,7 +46,7 @@
 }
 
 .image {
-  border-radius: 50%;
+  border-radius: 5px;
 }
 
 .title {
