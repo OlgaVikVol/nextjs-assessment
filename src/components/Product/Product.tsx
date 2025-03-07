@@ -6,6 +6,7 @@ import { Card } from '../Card/Card';
 import { Rating } from '../Rating/Rating';
 import { Tag } from '../Tag/Tag';
 import Image from 'next/image';
+import { Button } from '../Button/Button';
 
 export const Product = forwardRef(
   (
@@ -17,6 +18,7 @@ export const Product = forwardRef(
         <Card className={styles.product}>
           <div>
             <Image
+              className={styles.image}
               src={product.image}
               alt={product.title}
               width={70}
@@ -39,6 +41,30 @@ export const Product = forwardRef(
           <div className={styles['price-title']}>Price</div>
           <div className={styles['credit-title']}>Credit</div>
           <div className={styles['rate-title']}>{product.reviewCount}</div>
+          <div className={styles.hr}>
+            <hr />{' '}
+          </div>
+          <div className={styles.description}>{product.description}</div>
+          <div className={styles.feature}>feature</div>
+          <div className={styles['adv-block']}>
+            <div className={styles.advantages}>
+              <div>Advantges</div>
+              <div>{product.advantages}</div>
+            </div>
+            <div className={styles.disadvantages}>
+              <div>Disadvantages</div>
+              <div>{product.disadvantages}</div>
+            </div>
+          </div>
+          <div className={styles.hr}>
+            <hr />{' '}
+          </div>
+          <div className={styles.actions}>
+            <Button appearance="primary">Узнать подробнее</Button>
+            <Button appearance="ghost" arrow={'right'}>
+              Читать отзывы
+            </Button>
+          </div>
         </Card>
       </div>
     );
