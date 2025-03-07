@@ -6,6 +6,18 @@ const nextConfig: NextConfig = {
     locales: ['en', 'ru'], 
     defaultLocale: 'en', 
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',  
+        hostname: 'old-images.hb.ru-msk.vkcs.cloud',  
+      },
+      {
+        protocol: 'https',
+        hostname: 'courses-top.ru',
+      },
+    ],
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

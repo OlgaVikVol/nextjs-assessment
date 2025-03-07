@@ -1,0 +1,15 @@
+/* stylelint-disable declaration-property-value-no-unknown */
+.product {
+  display: grid;
+  padding: 30px;
+  grid-template-columns:
+		[start] 70px [logoend] 30px [titlestart]
+		\ calc(50% - 100px) [middle] 1fr [pricestart] auto [priceend] 40px
+		\ [creditstart] auto [creditend] 40px [ratestart] auto [end];
+  margin-top: 30px;
+}
+
+.logo {
+	grid-column: start / logoend;
+	grid-row: 1 / span 2;
+}

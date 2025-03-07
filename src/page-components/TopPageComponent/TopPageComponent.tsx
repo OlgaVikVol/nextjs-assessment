@@ -1,6 +1,6 @@
 import { JSX, useReducer } from 'react';
 import { TopPageComponentProps } from './TopPageComponent.props';
-import { Htag, Tag, JobVacancyStats, Sort } from '@/components';
+import { Htag, Tag, JobVacancyStats, Sort, Product } from '@/components';
 import styles from './TopPageComponent.module.css';
 import { TopLevelCategory } from '@/interfaces/page.interface';
 import { Advantages } from '@/components/Advantages/Advantages';
@@ -38,7 +38,7 @@ export const TopPageComponent = ({
       <div>
         {sortedProducts &&
           sortedProducts.map((product) => (
-            <div key={product._id}>{product.title}</div>
+            <Product product={product} key={product._id} />
           ))}
       </div>
       <div className={styles['hh-title']}>

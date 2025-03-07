@@ -8,4 +8,5 @@ export * from './JobVacancyStats/JobVacancyStats';
 export * from './Sort/Sort';
 export * from './Input/Input';
 export * from './Textarea/Textarea';
-export * from "./Search/Search";
+export * from './Search/Search';
+export * from './Product/Product';
