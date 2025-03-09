@@ -46,7 +46,7 @@ export const Product = forwardRef(
           </div>
           <div className={styles.tags}>
             {product.categories.map((category) => (
-              <Tag key={category} color="ghost" size="m">
+              <Tag key={category} className={styles.tag} color="ghost" size="m">
                 {category}
               </Tag>
             ))}

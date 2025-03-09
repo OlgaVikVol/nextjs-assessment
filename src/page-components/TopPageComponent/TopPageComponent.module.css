@@ -43,4 +43,10 @@
   .title {
     grid-template-columns: auto 1fr;
   }
+
+  .seo p,
+  .seo li {
+    padding-left: 20px;
+    padding-right: 20px; 
+  }
 }

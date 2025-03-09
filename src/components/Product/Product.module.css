@@ -266,6 +266,10 @@
   .rating {
     margin-bottom: 10px;
   }
+
+  .characteristics-value {
+    white-space: none;
+  }
 }
 
 @media screen and (width <= 480px) {
@@ -287,5 +291,20 @@
       'hr2'
       'actions';
     grid-template-columns: 1fr;
+  }
+
+  .tag {
+    margin-bottom: 6px;
+    margin-top: 6px;
+  }
+
+  .description,
+  .characteristics,
+  .adv-block {
+    padding-right: 20px; 
+  }
+
+  .characteristics-value {
+    white-space: normal;
   }
 }
