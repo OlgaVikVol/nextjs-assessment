@@ -1,4 +1,4 @@
-import { forwardRef, ForwardedRef, JSX } from 'react';
+import { forwardRef, ForwardedRef, JSX, useRef, useState } from 'react';
 import { ProductProps } from './Product.props';
 import cn from 'classnames';
 import styles from './Product.module.css';
@@ -9,12 +9,16 @@ import Image from 'next/image';
 import { Button } from '../Button/Button';
 import { decOfNum, priceUSD } from '@/helpers/helpers';
 import { Divider } from '../Divider/Divider';
+import { Review } from '../Review/Review';
 
 export const Product = forwardRef(
   (
     { product, className, ...props }: ProductProps,
     ref: ForwardedRef<HTMLDivElement>
   ): JSX.Element => {
+    const [isReviewOpened, setIsReviewOpened] = useState(false);
+    const reviewRef = useRef<HTMLDivElement>(null);
+
     return (
       <div className={className} {...props} ref={ref}>
         <Card className={styles.product}>
@@ -64,7 +68,9 @@ export const Product = forwardRef(
               <div className={styles.characteristics} key={c.name}>
                 <span className={styles['characteristics-name']}>{c.name}</span>
                 <span className={styles['characteristics-dots']}></span>
-                <span className={styles['characteristics-value']}>{c.value}</span>
+                <span className={styles['characteristics-value']}>
+                  {c.value}
+                </span>
               </div>
             ))}
           </div>
@@ -85,11 +91,31 @@ export const Product = forwardRef(
           <Divider className={cn(styles.hr, styles.hr2)} />
           <div className={styles.actions}>
             <Button appearance="primary">Узнать подробнее</Button>
-            <Button appearance="ghost" arrow={'right'}>
+            <Button
+              appearance="ghost"
+              arrow={isReviewOpened ? 'down' : 'right'}
+              onClick={() => setIsReviewOpened(!isReviewOpened)}
+              aria-expanded={isReviewOpened}
+            >
               Читать отзывы
             </Button>
           </div>
         </Card>
+        {isReviewOpened && (
+          <Card
+            color="blue"
+            className={styles.reviews}
+            ref={reviewRef}
+            tabIndex={isReviewOpened ? 0 : -1}
+          >
+            {product.reviews.map((r) => (
+              <div key={r._id}>
+                <Review review={r} />
+                <Divider />
+              </div>
+            ))}
+          </Card>
+        )}
       </div>
     );
   }
