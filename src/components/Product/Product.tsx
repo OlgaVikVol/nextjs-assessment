@@ -7,7 +7,7 @@ import { Rating } from '../Rating/Rating';
 import { Tag } from '../Tag/Tag';
 import Image from 'next/image';
 import { Button } from '../Button/Button';
-import { priceUSD } from '@/helpers/helpers';
+import { decOfNum, priceUSD } from '@/helpers/helpers';
 import { Divider } from '../Divider/Divider';
 
 export const Product = forwardRef(
@@ -53,15 +53,18 @@ export const Product = forwardRef(
           </div>
           <div className={styles['price-title']}>Price</div>
           <div className={styles['credit-title']}>Credit</div>
-          <div className={styles['rate-title']}>{product.reviewCount}</div>
+          <div className={styles['rate-title']}>
+            {product.reviewCount}{' '}
+            {decOfNum(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}
+          </div>
           <Divider className={styles.hr} />
           <div className={styles.description}>{product.description}</div>
           <div className={styles.feature}>
             {product.characteristics.map((c) => (
               <div className={styles.characteristics} key={c.name}>
-                <span className={styles.characteristicsName}>{c.name}</span>
-                <span className={styles.characteristicsDots}></span>
-                <span className={styles.characteristicsValue}>{c.value}</span>
+                <span className={styles['characteristics-name']}>{c.name}</span>
+                <span className={styles['characteristics-dots']}></span>
+                <span className={styles['characteristics-value']}>{c.value}</span>
               </div>
             ))}
           </div>

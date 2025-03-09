@@ -31,7 +31,7 @@
 }
 
 .rating,
-.rating-title {
+.rate-title {
   grid-column: ratestart / end;
   white-space: nowrap;
 }
@@ -138,6 +138,10 @@
 
 .characteristics-name {
   font-weight: bold;
+}
+
+.characteristics-value {
+  white-space: nowrap;
 }
 
 .characteristics-dots {
