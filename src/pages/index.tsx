@@ -6,6 +6,7 @@ import { JSX, useState } from 'react';
 import axios from 'axios';
 import { MenuItem } from '@/interfaces/menu.interface';
 import { useTranslation } from 'react-i18next';
+import { API } from '@/helpers/api';
 
 function Home({ menu}: HomeProps): JSX.Element {
   const [rating, setRating] = useState(4);
@@ -42,7 +43,7 @@ export default withLayout(Home);
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const firstCategory = 0;
   const { data: menu } = await axios.post<MenuItem[]>(
-    process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find',
+    API.topPage.find,
     {
       firstCategory,
     }

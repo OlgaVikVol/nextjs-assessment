@@ -8,7 +8,9 @@ import { Textarea } from '../Textarea/Textarea';
 import { Button } from '../Button/Button';
 import CloseIcon from './close.svg';
 import { useForm, Controller } from 'react-hook-form';
-import { IReviewForm } from './ReviewForm.interface';
+import { IReviewForm, IReviewSentResponse } from './ReviewForm.interface';
+import axios from 'axios';
+import { API } from '@/helpers/api';
 
 export const ReviewForm = ({
   productId,
@@ -24,10 +26,31 @@ export const ReviewForm = ({
     clearErrors,
   } = useForm<IReviewForm>();
 
-  const [isSuccess, setIsSuccess] = useState(true);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string>();
 
-  const onSubmit = (data: IReviewForm) => {};
+  const onSubmit = async (formData: IReviewForm) => {
+    try {
+      const { data } = await axios.post<IReviewSentResponse>(
+        API.review.createDemo,
+        {
+          ...formData,
+          productId,
+        }
+      );
+
+      if (data.message) {
+        setIsSuccess(true);
+        reset();
+      } else {
+        setError('Error');
+      }
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(e.message);
+      }
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -52,7 +75,7 @@ export const ReviewForm = ({
           <Controller
             control={control}
             name="rating"
-						rules={{ required: { value: true, message: 'Add rating' } }}
+            rules={{ required: { value: true, message: 'Add rating' } }}
             render={({ field }) => (
               <Rating
                 isEditable
@@ -70,7 +93,7 @@ export const ReviewForm = ({
           })}
           error={errors.description}
           placeholder="Review Text"
-					className={styles.description}
+          className={styles.description}
         />
         <div className={styles.submit}>
           <Button appearance="primary">Send</Button>
@@ -88,7 +111,11 @@ export const ReviewForm = ({
           <div>
             Thank you, your review will be published after verification.
           </div>
-          <button className={styles.close} aria-label="Close review">
+          <button
+            className={styles.close}
+            aria-label="Close review"
+            onClick={() => setIsSuccess(false)}
+          >
             {' '}
             <CloseIcon />
           </button>
@@ -97,8 +124,11 @@ export const ReviewForm = ({
       {error && (
         <div className={cn(styles.error, styles.panel)} role="alert">
           Something went wrong, try refreshing the page.
-          <button className={styles.close} aria-label="Close review">
-            {' '}
+          <button
+            className={styles.close}
+            aria-label="Close review"
+            onClick={() => setIsSuccess(false)}
+          >
             <CloseIcon />
           </button>
         </div>
