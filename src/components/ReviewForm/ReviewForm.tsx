@@ -43,7 +43,14 @@ export const ReviewForm = ({
           <Controller
             control={control}
             name="rating"
-            render={({ field }) => <Rating isEditable rating={field.value} setRating={field.onChange}/>}
+            render={({ field }) => (
+              <Rating
+                isEditable
+                ref={field.ref}
+                rating={field.value}
+                setRating={field.onChange}
+              />
+            )}
           />
         </div>
         <Textarea {...register('description')} placeholder="Review Text" />
