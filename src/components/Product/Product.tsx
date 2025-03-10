@@ -10,6 +10,7 @@ import { Button } from '../Button/Button';
 import { decOfNum, priceUSD } from '@/helpers/helpers';
 import { Divider } from '../Divider/Divider';
 import { Review } from '../Review/Review';
+import { ReviewForm } from '../ReviewForm/ReviewForm';
 
 export const Product = forwardRef(
   (
@@ -114,6 +115,7 @@ export const Product = forwardRef(
                 <Divider />
               </div>
             ))}
+            <ReviewForm productId={product._id} />
           </Card>
         )}
       </div>
