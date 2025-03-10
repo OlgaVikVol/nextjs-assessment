@@ -20,6 +20,15 @@ export const Product = forwardRef(
     const [isReviewOpened, setIsReviewOpened] = useState(false);
     const reviewRef = useRef<HTMLDivElement>(null);
 
+    const scrollToReview = () => {
+      setIsReviewOpened(true);
+      setTimeout(() => {
+        if (reviewRef.current) {
+          reviewRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 50)
+    };
+
     return (
       <div className={className} {...props} ref={ref}>
         <Card className={styles.product}>
@@ -59,8 +68,10 @@ export const Product = forwardRef(
           <div className={styles['price-title']}>Price</div>
           <div className={styles['credit-title']}>Credit</div>
           <div className={styles['rate-title']}>
-            {product.reviewCount}{' '}
-            {decOfNum(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}
+            <a href="#ref" onClick={scrollToReview}>
+              {product.reviewCount}{' '}
+              {decOfNum(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}
+            </a>
           </div>
           <Divider className={styles.hr} />
           <div className={styles.description}>{product.description}</div>
