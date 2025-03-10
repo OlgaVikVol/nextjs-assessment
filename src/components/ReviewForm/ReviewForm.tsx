@@ -32,9 +32,18 @@ export const ReviewForm = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={cn(styles['review-form'])} {...props}>
-        <Input {...register('name')} placeholder="Name" />
         <Input
-          {...register('title')}
+          {...register('name', {
+            required: { value: true, message: 'Add name' },
+          })}
+          error={errors.name}
+          placeholder="Name"
+        />
+        <Input
+          {...register('title', {
+            required: { value: true, message: 'Add title' },
+          })}
+          error={errors.title}
           placeholder="Review Title"
           className={styles.title}
         />
@@ -43,17 +52,26 @@ export const ReviewForm = ({
           <Controller
             control={control}
             name="rating"
+						rules={{ required: { value: true, message: 'Add rating' } }}
             render={({ field }) => (
               <Rating
                 isEditable
                 ref={field.ref}
                 rating={field.value}
                 setRating={field.onChange}
+                error={errors.rating}
               />
             )}
           />
         </div>
-        <Textarea {...register('description')} placeholder="Review Text" />
+        <Textarea
+          {...register('description', {
+            required: { value: true, message: 'Add description' },
+          })}
+          error={errors.description}
+          placeholder="Review Text"
+					className={styles.description}
+        />
         <div className={styles.submit}>
           <Button appearance="primary">Send</Button>
           <span className={styles.info}>
