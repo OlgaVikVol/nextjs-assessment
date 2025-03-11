@@ -7,6 +7,7 @@ import { Advantages } from '@/components/Advantages/Advantages';
 import { SortEnum } from '@/components/Sort/Sort.props';
 import { sortReducer } from './sort.reducer';
 
+
 export const TopPageComponent = ({
   page,
   products,

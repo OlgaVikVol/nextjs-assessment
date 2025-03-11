@@ -14,6 +14,7 @@
   grid-template-columns: 24px 1fr;
   line-height: 25px;
   margin-top: 20px;
+
 }
 
 .first-level-list {
@@ -71,6 +72,7 @@
 .third-block {
   list-style: none;
   padding-left: 0;
+  white-space: nowrap; 
 }
 
 .third-level-active,

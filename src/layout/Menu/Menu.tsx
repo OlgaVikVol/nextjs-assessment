@@ -11,12 +11,36 @@ import cn from 'classnames';
 import styles from './Menu.module.css';
 import { FirstLevelMenuItem, PageItem } from '@/interfaces/menu.interface';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import { motion, useReducedMotion } from 'framer-motion';
 
 export const Menu = (): JSX.Element => {
   const { menu, firstCategory, setMenu } = useContext(AppContext);
   const [announce, setAnnounce] = useState<'closed' | 'opened' | undefined>();
   const router = useRouter();
+  const shouldReducedMotion = useReducedMotion();
+
+  const variants = {
+    visible: {
+      marginBottom: 20,
+      transition: shouldReducedMotion
+        ? {}
+        : {
+            when: 'beforeChildren',
+            staggerChildren: 0.1,
+          },
+    },
+    hidden: {
+      marginBottom: 0,
+    },
+  };
+
+  const variantsChildren = {
+    visible: {
+      opacity: 1,
+      height: 29,
+    },
+    hidden: { opacity: shouldReducedMotion ? 1 : 0, height: 0 },
+  };
 
   const openSecondLevel = (secondCategory: string) => {
     if (setMenu) {
@@ -82,8 +106,15 @@ export const Menu = (): JSX.Element => {
               >
                 {m._id.secondCategory}
               </button>
-
-              {m.isOpened && buildThirdLevel(m.pages, menuItem.route)}
+              <motion.ul
+                layout
+                variants={variants}
+                initial={m.isOpened ? 'visible' : 'hidden'}
+                animate={m.isOpened ? 'visible' : 'hidden'}
+                className={styles['second-level-block']}
+              >
+                {buildThirdLevel(m.pages, menuItem.route)}
+              </motion.ul>
             </li>
           );
         })}
@@ -95,7 +126,7 @@ export const Menu = (): JSX.Element => {
     return (
       <ul className={styles['third-block']}>
         {pages.map((p) => (
-          <li key={p._id}>
+          <motion.li key={p._id} variants={variantsChildren}>
             <Link
               href={`/${route}/${p.alias}`}
               className={cn(styles['third-level'], {
@@ -108,7 +139,7 @@ export const Menu = (): JSX.Element => {
             >
               {p.category}
             </Link>
-          </li>
+          </motion.li>
         ))}
       </ul>
     );
@@ -116,6 +147,11 @@ export const Menu = (): JSX.Element => {
 
   return (
     <nav className={styles.menu} role="navigation">
+      {announce && (
+        <span role="log" className="visualyHidden">
+          {announce == 'opened' ? 'visible' : 'hidden'}
+        </span>
+      )}
       {buildFirstLevel()}
     </nav>
   );
