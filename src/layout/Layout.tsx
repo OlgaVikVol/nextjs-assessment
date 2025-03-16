@@ -5,6 +5,7 @@ import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
 import styles from './Layout.module.css';
 import { AppContextProvider, IAppContext } from '@/context/app.context';
+import { ScrollToTopButton } from '@/components';
 
 const Layout = ({ children }: LayoutProps): JSX.Element => {
   return (
@@ -13,6 +14,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
       <Sidebar className={styles.sidebar} />
       <main className={styles.body}>{children}</main>
       <Footer className={styles.footer} />
+      <ScrollToTopButton />
     </div>
   );
 };

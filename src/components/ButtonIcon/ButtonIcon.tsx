@@ -19,7 +19,7 @@ export const ButtonIcon = ({
       })}
 			{...props}
     >
-			<IconComp />
+			<IconComp/>
 		</button>
   );
 };
