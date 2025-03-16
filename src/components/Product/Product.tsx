@@ -11,8 +11,9 @@ import { decOfNum, priceUSD } from '@/helpers/helpers';
 import { Divider } from '../Divider/Divider';
 import { Review } from '../Review/Review';
 import { ReviewForm } from '../ReviewForm/ReviewForm';
+import { motion } from 'framer-motion';
 
-export const Product = forwardRef(
+export const Product = motion(forwardRef(
   (
     { product, className, ...props }: ProductProps,
     ref: ForwardedRef<HTMLDivElement>
@@ -20,13 +21,21 @@ export const Product = forwardRef(
     const [isReviewOpened, setIsReviewOpened] = useState(false);
     const reviewRef = useRef<HTMLDivElement>(null);
 
+    const variants = {
+      visible: { opacity: 1, height: 'auto' },
+      hidden: { opacity: 0, height: 0 },
+    };
+
     const scrollToReview = () => {
       setIsReviewOpened(true);
       setTimeout(() => {
         if (reviewRef.current) {
-          reviewRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          reviewRef.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
         }
-      }, 50)
+      }, 50);
     };
 
     return (
@@ -113,7 +122,11 @@ export const Product = forwardRef(
             </Button>
           </div>
         </Card>
-        {isReviewOpened && (
+        <motion.div
+          animate={isReviewOpened ? 'visible' : 'hidden'}
+          variants={variants}
+          initial="hidden"
+        >
           <Card
             color="blue"
             className={styles.reviews}
@@ -128,8 +141,8 @@ export const Product = forwardRef(
             ))}
             <ReviewForm productId={product._id} />
           </Card>
-        )}
+        </motion.div>
       </div>
     );
   }
-);
+));
