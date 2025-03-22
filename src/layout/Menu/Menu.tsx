@@ -9,7 +9,7 @@ import {
 } from 'react';
 import cn from 'classnames';
 import styles from './Menu.module.css';
-import { FirstLevelMenuItem, PageItem } from '@/interfaces/menu.interface';
+import { FirstLevelMenuItem, MenuItem, PageItem } from '@/interfaces/menu.interface';
 import { useRouter } from 'next/router';
 import { motion, useReducedMotion } from 'framer-motion';
 
@@ -88,7 +88,7 @@ export const Menu = (): JSX.Element => {
   const buildSecondLevel = (menuItem: FirstLevelMenuItem) => {
     return (
       <ul className={styles['second-block']}>
-        {menu.map((m) => {
+        {menu.map((m: MenuItem) => {
           if (
             m.pages.map((p) => p.alias).includes(router.asPath.split('/')[2])
           ) {
@@ -113,7 +113,7 @@ export const Menu = (): JSX.Element => {
                 animate={m.isOpened ? 'visible' : 'hidden'}
                 className={styles['second-level-block']}
               >
-                {buildThirdLevel(m.pages, menuItem.route)}
+                {buildThirdLevel(m.pages, menuItem.route, m.isOpened ?? false)}
               </motion.ul>
             </li>
           );
@@ -122,13 +122,14 @@ export const Menu = (): JSX.Element => {
     );
   };
 
-  const buildThirdLevel = (pages: PageItem[], route: string) => {
+  const buildThirdLevel = (pages: PageItem[], route: string, isOpened: boolean) => {
     return (
       <ul className={styles['third-block']}>
         {pages.map((p) => (
           <motion.li key={p._id} variants={variantsChildren}>
             <Link
               href={`/${route}/${p.alias}`}
+              tabIndex={isOpened ? 0 : -1}
               className={cn(styles['third-level'], {
                 [styles['third-level-active']]:
                   `/${route}/${p.alias}` === router.asPath,
