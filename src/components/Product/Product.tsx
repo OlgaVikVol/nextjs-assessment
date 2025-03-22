@@ -28,14 +28,11 @@ export const Product = motion(forwardRef(
 
     const scrollToReview = () => {
       setIsReviewOpened(true);
-      setTimeout(() => {
-        if (reviewRef.current) {
-          reviewRef.current.scrollIntoView({
+          reviewRef.current?.scrollIntoView({
             behavior: 'smooth',
             block: 'start',
           });
-        }
-      }, 50);
+          reviewRef.current?.focus();
     };
 
     return (
@@ -139,7 +136,7 @@ export const Product = motion(forwardRef(
                 <Divider />
               </div>
             ))}
-            <ReviewForm productId={product._id} />
+            <ReviewForm productId={product._id} isOpened={isReviewOpened} />
           </Card>
         </motion.div>
       </div>

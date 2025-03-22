@@ -14,6 +14,7 @@ import { API } from '@/helpers/api';
 
 export const ReviewForm = ({
   productId,
+  isOpened,
   className,
   ...props
 }: ReviewFormProps): JSX.Element => {
@@ -61,6 +62,7 @@ export const ReviewForm = ({
           })}
           error={errors.name}
           placeholder="Name"
+          tabIndex={isOpened ? 0 : -1}
         />
         <Input
           {...register('title', {
@@ -69,6 +71,7 @@ export const ReviewForm = ({
           error={errors.title}
           placeholder="Review Title"
           className={styles.title}
+          tabIndex={isOpened ? 0 : -1}
         />
         <div className={styles.rating}>
           <span>Rating:</span>
@@ -83,6 +86,7 @@ export const ReviewForm = ({
                 rating={field.value}
                 setRating={field.onChange}
                 error={errors.rating}
+                tabIndex={isOpened ? 0 : -1}
               />
             )}
           />
@@ -94,9 +98,10 @@ export const ReviewForm = ({
           error={errors.description}
           placeholder="Review Text"
           className={styles.description}
+          tabIndex={isOpened ? 0 : -1}
         />
         <div className={styles.submit}>
-          <Button appearance="primary">Send</Button>
+          <Button appearance="primary" tabIndex={isOpened ? 0 : -1}>Send</Button>
           <span className={styles.info}>
             * The review will undergo preliminary moderation and verification
             before publication.
