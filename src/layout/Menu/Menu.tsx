@@ -73,7 +73,7 @@ export const Menu = (): JSX.Element => {
     return (
       <ul className={styles['first-level-list']}>
         {firstLevelMenu.map((m) => (
-          <li key={m.route} aria-expanded={m.id === firstCategory}>
+          <li key={m.route}>
             <Link href={`/${m.route}`} className={styles['first-level']}>
               <span className={styles['icon-wrapper']}>{m.icon}</span>
               <span>{m.name}</span>
@@ -149,7 +149,7 @@ export const Menu = (): JSX.Element => {
   return (
     <nav className={styles.menu} role="navigation">
       {announce && (
-        <span role="log" className="visualyHidden">
+        <span role="log" className="visualy-hidden">
           {announce == 'opened' ? 'visible' : 'hidden'}
         </span>
       )}

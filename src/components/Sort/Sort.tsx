@@ -17,6 +17,7 @@ export const Sort = ({
       </div>
       <button
         id="rating"
+        role="tab"
         onClick={() => setSort(SortEnum.Rating)}
         className={cn({ [styles.active]: sort === SortEnum.Rating })}
 				aria-selected={sort === SortEnum.Rating}
@@ -27,6 +28,7 @@ export const Sort = ({
       </button>
 			<button
         id="price"
+        role="tab"
         onClick={() => setSort(SortEnum.Price)}
         className={cn({ [styles.active]: sort === SortEnum.Price})}
 				aria-selected={sort === SortEnum.Price}
