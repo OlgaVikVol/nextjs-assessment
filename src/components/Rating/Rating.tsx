@@ -51,8 +51,16 @@ export const Rating = forwardRef(
           onMouseLeave={() => changeDisplay(rating)}
           onClick={() => onClick(i + 1)}
           onKeyDown={handleKey}
-          ref={(el) => { ratingArrayRef.current[i] = el; }}
+          ref={(el) => {
+            ratingArrayRef.current[i] = el;
+          }}
           tabIndex={computeFocus(rating, i)}
+          role={isEditable ? 'slider' : ''}
+          aria-invalid={error ? true : false}
+          aria-valuenow={rating}
+          aria-valuemin={1}
+          aria-valuemax={5}
+          aria-label={isEditable ? 'Add rating' : 'rating' + rating}
         >
           <StarIcon height="20px" width="20px" />
         </span>
@@ -75,25 +83,25 @@ export const Rating = forwardRef(
     };
 
     const handleKey = (e: KeyboardEvent) => {
-      if(!isEditable || !setRating) {
-        return
+      if (!isEditable || !setRating) {
+        return;
       }
 
-      if(e.code === "ArrowRight" || e.code === "ArrowUp") {
-        if(!rating) {
-          setRating(1)
+      if (e.code === 'ArrowRight' || e.code === 'ArrowUp') {
+        if (!rating) {
+          setRating(1);
         } else {
           e.preventDefault();
-          setRating(rating < 5 ? rating + 1: 5)
+          setRating(rating < 5 ? rating + 1 : 5);
         }
-        ratingArrayRef.current[rating]?.focus()
+        ratingArrayRef.current[rating]?.focus();
       }
-      if(e.code === "ArrowLeft" || e.code === "ArrowDown") {
+      if (e.code === 'ArrowLeft' || e.code === 'ArrowDown') {
         e.preventDefault();
-        setRating(rating > 1 ? rating -1 : 1);
+        setRating(rating > 1 ? rating - 1 : 1);
         ratingArrayRef.current[rating - 2]?.focus();
       }
-    }
+    };
 
     return (
       <div

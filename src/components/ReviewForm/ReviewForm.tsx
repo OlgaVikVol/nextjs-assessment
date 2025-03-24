@@ -63,6 +63,7 @@ export const ReviewForm = ({
           error={errors.name}
           placeholder="Name"
           tabIndex={isOpened ? 0 : -1}
+          aria-invalid={errors.name ? true : false}
         />
         <Input
           {...register('title', {
@@ -72,6 +73,7 @@ export const ReviewForm = ({
           placeholder="Review Title"
           className={styles.title}
           tabIndex={isOpened ? 0 : -1}
+          aria-invalid={errors.title ? true : false}
         />
         <div className={styles.rating}>
           <span>Rating:</span>
@@ -87,6 +89,8 @@ export const ReviewForm = ({
                 setRating={field.onChange}
                 error={errors.rating}
                 tabIndex={isOpened ? 0 : -1}
+                aria-label="Review text"
+                aria-invalid={errors.description ? true : false}
               />
             )}
           />
@@ -101,7 +105,13 @@ export const ReviewForm = ({
           tabIndex={isOpened ? 0 : -1}
         />
         <div className={styles.submit}>
-          <Button appearance="primary" tabIndex={isOpened ? 0 : -1}>Send</Button>
+          <Button
+            appearance="primary"
+            tabIndex={isOpened ? 0 : -1}
+            onClick={() => clearErrors()}
+          >
+            Send
+          </Button>
           <span className={styles.info}>
             * The review will undergo preliminary moderation and verification
             before publication.
