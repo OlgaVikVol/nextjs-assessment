@@ -73,7 +73,7 @@ export const Menu = (): JSX.Element => {
     return (
       <ul className={styles['first-level-list']}>
         {firstLevelMenu.map((m) => (
-          <li key={m.route}>
+          <li key={m.route} aria-expanded={m.id === firstCategory}>
             <Link href={`/${m.route}`} className={styles['first-level']}>
               <span className={styles['icon-wrapper']}>{m.icon}</span>
               <span>{m.name}</span>

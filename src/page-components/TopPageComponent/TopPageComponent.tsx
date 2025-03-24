@@ -41,7 +41,7 @@ export const TopPageComponent = ({
         )}
         <Sort sort={sort} setSort={setSort} />
       </div>
-      <div>
+      <div role="list">
         {sortedProducts &&
           sortedProducts.map((product) => (
             <Product role="listitem" layout={shouldReduceMotion ? false: true} product={product} key={product._id} />
