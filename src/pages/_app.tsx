@@ -2,6 +2,14 @@ import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { appWithTranslation } from 'next-i18next';
 import Head from 'next/head';
+import { Router } from 'next/router';
+import ym, { YMInitializer } from 'react-yandex-metrika';
+
+Router.events.on('routeChangeComplete', (url: string) => {
+  if (typeof window !== 'undefined') {
+    ym('hit', url);
+  }
+});
 
 function App({ Component, pageProps, router }: AppProps) {
   return (
@@ -10,6 +18,7 @@ function App({ Component, pageProps, router }: AppProps) {
         <title>MyTopCourse</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link rel="preconnect" href="https://mc.yandex.ru" />
         <link
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
           rel="stylesheet"
@@ -21,6 +30,11 @@ function App({ Component, pageProps, router }: AppProps) {
         <meta property="og:locale" content="en_US" />
         <meta property="og:locale:alternate" content="ru_RU" />
       </Head>
+      <YMInitializer
+        accounts={[]}
+        options={{ webvisor: true, defer: true }}
+        version="2"
+      />
       <Component {...pageProps} />
     </>
   );
