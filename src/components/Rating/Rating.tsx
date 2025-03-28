@@ -6,6 +6,7 @@ import {
   forwardRef,
   ForwardedRef,
   useRef,
+  useCallback,
 } from 'react';
 import { RatingProps } from './Rating.props';
 import StarIcon from './star.svg';
@@ -22,86 +23,75 @@ export const Rating = forwardRef(
     );
     const ratingArrayRef = useRef<(HTMLSpanElement | null)[]>([]);
 
+    const constructRating = useCallback(
+      (currentRating: number) => {
+        const computeFocus = (r: number, i: number): number => {
+          if (!isEditable) return -1;
+          if (!rating && i === 0) return tabIndex ?? 0;
+          if (r === i + 1) return tabIndex ?? 0;
+          return -1;
+        };
+
+        const handleKey = (e: KeyboardEvent) => {
+          if (!isEditable || !setRating) return;
+
+          if (e.code === 'ArrowRight' || e.code === 'ArrowUp') {
+            if (!rating) {
+              setRating(1);
+            } else {
+              e.preventDefault();
+              setRating(rating < 5 ? rating + 1 : 5);
+            }
+            ratingArrayRef.current[rating]?.focus();
+          }
+
+          if (e.code === 'ArrowLeft' || e.code === 'ArrowDown') {
+            e.preventDefault();
+            setRating(rating > 1 ? rating - 1 : 1);
+            ratingArrayRef.current[rating - 2]?.focus();
+          }
+        };
+
+        const updatedArray = new Array(5).fill(null).map((_, i) => (
+          <span
+            key={i}
+            className={cn(styles.star, {
+              [styles.filled]: i < currentRating,
+              [styles.editable]: isEditable,
+            })}
+            onMouseEnter={() => {
+              if (isEditable) constructRating(i + 1);
+            }}
+            onMouseLeave={() => {
+              if (isEditable) constructRating(rating);
+            }}
+            onClick={() => {
+              if (isEditable && setRating) setRating(i + 1);
+            }}
+            onKeyDown={handleKey}
+            ref={(el) => {
+              ratingArrayRef.current[i] = el;
+            }}
+            tabIndex={computeFocus(currentRating, i)}
+            role={isEditable ? 'slider' : ''}
+            aria-invalid={!!error}
+            aria-valuenow={rating}
+            aria-valuemin={1}
+            aria-valuemax={5}
+            aria-label={isEditable ? 'Add rating' : `rating ${rating}`}
+          >
+            <StarIcon height="20px" width="20px" />
+          </span>
+        ));
+
+        setRatingArray(updatedArray);
+      },
+      [isEditable, rating, setRating, tabIndex, error]
+    );
+
     useEffect(() => {
       constructRating(rating);
-    }, [rating, tabIndex]);
-
-    const computeFocus = (r: number, i: number): number => {
-      if (!isEditable) {
-        return -1;
-      }
-      if (!rating && i == 0) {
-        return tabIndex ?? 0;
-      }
-      if (r == i + 1) {
-        return tabIndex ?? 0;
-      }
-      return -1;
-    };
-
-    const constructRating = (currentRating: number) => {
-      const updatedArray = ratingArray.map((r: JSX.Element, i: number) => (
-        <span
-          key={i}
-          className={cn(styles.star, {
-            [styles.filled]: i < currentRating,
-            [styles.editable]: isEditable,
-          })}
-          onMouseEnter={() => changeDisplay(i + 1)}
-          onMouseLeave={() => changeDisplay(rating)}
-          onClick={() => onClick(i + 1)}
-          onKeyDown={handleKey}
-          ref={(el) => {
-            ratingArrayRef.current[i] = el;
-          }}
-          tabIndex={computeFocus(rating, i)}
-          role={isEditable ? 'slider' : ''}
-          aria-invalid={error ? true : false}
-          aria-valuenow={rating}
-          aria-valuemin={1}
-          aria-valuemax={5}
-          aria-label={isEditable ? 'Add rating' : 'rating' + rating}
-        >
-          <StarIcon height="20px" width="20px" />
-        </span>
-      ));
-      setRatingArray(updatedArray);
-    };
-
-    const changeDisplay = (i: number) => {
-      if (!isEditable) {
-        return;
-      }
-      constructRating(i);
-    };
-
-    const onClick = (i: number) => {
-      if (!isEditable || !setRating) {
-        return;
-      }
-      setRating(i);
-    };
-
-    const handleKey = (e: KeyboardEvent) => {
-      if (!isEditable || !setRating) {
-        return;
-      }
-
-      if (e.code === 'ArrowRight' || e.code === 'ArrowUp') {
-        if (!rating) {
-          setRating(1);
-        } else {
-          e.preventDefault();
-          setRating(rating < 5 ? rating + 1 : 5);
-        }
-        ratingArrayRef.current[rating]?.focus();
-      }
-      if (e.code === 'ArrowLeft' || e.code === 'ArrowDown') {
-        e.preventDefault();
-        setRating(rating > 1 ? rating - 1 : 1);
-        ratingArrayRef.current[rating - 2]?.focus();
-      }
-    };
+    }, [rating, tabIndex, constructRating]);
 
     return (
       <div
@@ -123,3 +113,5 @@ export const Rating = forwardRef(
     );
   }
 );
+
+Rating.displayName = 'Rating';

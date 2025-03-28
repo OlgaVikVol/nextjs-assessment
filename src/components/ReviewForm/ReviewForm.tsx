@@ -55,7 +55,7 @@ export const ReviewForm = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={cn(styles['review-form'])} {...props}>
+      <div className={cn(styles['review-form'], className)} {...props}>
         <Input
           {...register('name', {
             required: { value: true, message: 'Add name' },

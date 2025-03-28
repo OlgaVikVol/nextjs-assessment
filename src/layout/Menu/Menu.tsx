@@ -9,7 +9,11 @@ import {
 } from 'react';
 import cn from 'classnames';
 import styles from './Menu.module.css';
-import { FirstLevelMenuItem, MenuItem, PageItem } from '@/interfaces/menu.interface';
+import {
+  FirstLevelMenuItem,
+  MenuItem,
+  PageItem,
+} from '@/interfaces/menu.interface';
 import { useRouter } from 'next/router';
 import { motion, useReducedMotion } from 'framer-motion';
 
@@ -73,7 +77,7 @@ export const Menu = (): JSX.Element => {
     return (
       <ul className={styles['first-level-list']}>
         {firstLevelMenu.map((m) => (
-          <li key={m.route} aria-expanded={m.id === firstCategory}>
+          <li key={m.route}>
             <Link href={`/${m.route}`} className={styles['first-level']}>
               <span className={styles['icon-wrapper']}>{m.icon}</span>
               <span>{m.name}</span>
@@ -122,7 +126,11 @@ export const Menu = (): JSX.Element => {
     );
   };
 
-  const buildThirdLevel = (pages: PageItem[], route: string, isOpened: boolean) => {
+  const buildThirdLevel = (
+    pages: PageItem[],
+    route: string,
+    isOpened: boolean
+  ) => {
     return (
       <ul className={styles['third-block']}>
         {pages.map((p) => (

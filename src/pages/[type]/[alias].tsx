@@ -13,19 +13,26 @@ import Head from 'next/head';
 function TopPage({ firstCategory, page, products }: CourseProps) {
   return (
     <>
-      <Head>
-        <title>{page.metaTitle}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content={page.metaDescription} />
-        <meta property='og:title' content={page.metaTitle}/>
-        <meta property="og:description" content={page.metaDescription}/>
-        <meta property='og:type' content='article'/>
-      </Head>
-      <TopPageComponent
-        firstCategory={firstCategory}
-        page={page}
-        products={products}
-      />
+      {page && products && (
+        <>
+          <Head>
+            <title>{page.metaTitle}</title>
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1"
+            />
+            <meta name="description" content={page.metaDescription} />
+            <meta property="og:title" content={page.metaTitle} />
+            <meta property="og:description" content={page.metaDescription} />
+            <meta property="og:type" content="article" />
+          </Head>
+          <TopPageComponent
+            firstCategory={firstCategory}
+            page={page}
+            products={products}
+          />
+        </>
+      )}
     </>
   );
 }
