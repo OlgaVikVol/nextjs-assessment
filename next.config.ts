@@ -2,15 +2,13 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  i18n: {
-    locales: ['en', 'ru'], 
-    defaultLocale: 'en', 
-  },
+  output: 'export',
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
-        protocol: 'https',  
-        hostname: 'old-images.hb.ru-msk.vkcs.cloud',  
+        protocol: 'https',
+        hostname: 'old-images.hb.ru-msk.vkcs.cloud',
       },
       {
         protocol: 'https',
@@ -26,7 +24,7 @@ const nextConfig: NextConfig = {
         {
           loader: '@svgr/webpack',
           options: {
-            icon: true, 
+            icon: true,
             svgo: true,
             svgoConfig: {
               plugins: [
@@ -34,14 +32,14 @@ const nextConfig: NextConfig = {
                   name: 'preset-default',
                   params: {
                     override: {
-                      removeViewBox: false, 
+                      removeViewBox: false,
                     },
                   },
                 },
               ],
             },
             titleProp: true,
-            ref: true, 
+            ref: true,
           },
         },
       ],
