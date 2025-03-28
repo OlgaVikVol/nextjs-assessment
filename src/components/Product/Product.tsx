@@ -29,7 +29,7 @@ const ProductComponent = forwardRef(function ProductComponent(
 
   const variants = {
     visible: { opacity: 1, height: 'auto' },
-    hidden: { opacity: 0, height: 0 },
+    hidden: { opacity: 0, height: 0, overflow: 'hidden' },
   };
 
   const scrollToReview = () => {
