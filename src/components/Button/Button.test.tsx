@@ -2,7 +2,11 @@ import { render, screen } from '@testing-library/react';
 import { Button } from './Button';
 import '@testing-library/jest-dom';
 
-jest.mock('./arrow.svg', () => () => <svg data-testid="arrow-icon" />);
+jest.mock('./arrow.svg', () => {
+  const ArrowIconMock = () => <svg data-testid="arrow-icon" />;
+  ArrowIconMock.displayName = 'ArrowIconMock';
+  return ArrowIconMock;
+});
 
 describe('Button', () => {
   it('renders with children', () => {

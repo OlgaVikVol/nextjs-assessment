@@ -3,7 +3,11 @@ import { Rating } from './Rating';
 import '@testing-library/jest-dom';
 
 // Mock the SVG star
-jest.mock('./star.svg', () => () => <svg data-testid="star-icon" />);
+jest.mock('./star.svg', () => {
+  const StarIconMock = () => <svg data-testid="star-icon" />;
+  StarIconMock.displayName = 'StarIconMock';
+  return StarIconMock;
+});
 
 describe('Rating', () => {
   it('renders 5 stars', () => {
@@ -17,7 +21,7 @@ describe('Rating', () => {
     render(<Rating rating={2} isEditable={true} setRating={setRating} />);
 
     const stars = screen.getAllByTestId('star-icon');
-    fireEvent.click(stars[3]); 
+    fireEvent.click(stars[3]);
     expect(setRating).toHaveBeenCalledWith(4);
   });
 

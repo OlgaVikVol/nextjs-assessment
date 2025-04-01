@@ -4,7 +4,11 @@ import { SortEnum } from './Sort.props';
 import '@testing-library/jest-dom';
 
 // Mock the SortIcon
-jest.mock('./sort.svg', () => () => <svg data-testid="sort-icon" />);
+jest.mock('./sort.svg', () => {
+  const SortIconMock = () => <svg data-testid="sort-icon" />;
+  SortIconMock.displayName = 'SortIconMock';
+  return SortIconMock;
+});
 
 describe('Sort component', () => {
   it('renders both sort buttons with icons and labels', () => {
@@ -16,16 +20,16 @@ describe('Sort component', () => {
   });
 
   it('applies active class and aria-selected correctly', () => {
-    const { container } = render(<Sort sort={SortEnum.Price} setSort={jest.fn()} />);
-    const priceButton = screen.getByRole('tab', { name: /by price/i });
-
-    expect(priceButton).toHaveClass('active');
-    expect(priceButton).toHaveAttribute('aria-selected', 'true');
-
-    const ratingButton = screen.getByRole('tab', { name: /by rating/i });
-    expect(ratingButton).not.toHaveClass('active');
-    expect(ratingButton).toHaveAttribute('aria-selected', 'false');
-  });
+		render(<Sort sort={SortEnum.Price} setSort={jest.fn()} />); // ✅ render first
+	
+		const priceButton = screen.getByRole('tab', { name: /by price/i });
+		expect(priceButton).toHaveClass('active');
+		expect(priceButton).toHaveAttribute('aria-selected', 'true');
+	
+		const ratingButton = screen.getByRole('tab', { name: /by rating/i });
+		expect(ratingButton).not.toHaveClass('active');
+		expect(ratingButton).toHaveAttribute('aria-selected', 'false');
+	});
 
   it('calls setSort with correct value on click', () => {
     const mockSetSort = jest.fn();

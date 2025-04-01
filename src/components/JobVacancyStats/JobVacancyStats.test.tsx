@@ -3,11 +3,15 @@ import { JobVacancyStats } from './JobVacancyStats';
 import '@testing-library/jest-dom';
 
 // Mock SVG component
-jest.mock('./rate.svg', () => () => <svg data-testid="rate-icon" />);
+jest.mock('./rate.svg', () => {
+  const RateIconMock = () => <svg data-testid="rate-icon" />;
+  RateIconMock.displayName = 'RateIconMock';
+  return RateIconMock;
+});
 
 // Mock currency formatting
 jest.mock('@/helpers/helpers', () => ({
-  priceUSD: (n: number) => `$${n}`
+  priceUSD: (n: number) => `$${n}`,
 }));
 
 describe('JobVacancyStats', () => {
@@ -16,8 +20,8 @@ describe('JobVacancyStats', () => {
     juniorSalary: 1000,
     middleSalary: 3000,
     seniorSalary: 6000,
-		_id: 'test-id',
-		updatedAt: new Date()
+    _id: 'test-id',
+    updatedAt: new Date(),
   };
 
   beforeEach(() => {

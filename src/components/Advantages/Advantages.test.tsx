@@ -2,7 +2,11 @@ import { render, screen } from '@testing-library/react';
 import { Advantages } from './Advantages';
 import '@testing-library/jest-dom';
 
-jest.mock('./check.svg', () => () => <svg data-testid="check-icon" />);
+jest.mock('./check.svg', () => {
+  const CheckIconMock = () => <svg data-testid="check-icon" />;
+  CheckIconMock.displayName = 'CheckIconMock';
+  return CheckIconMock;
+});
 
 describe('Advantages component', () => {
   const mockAdvantages = [

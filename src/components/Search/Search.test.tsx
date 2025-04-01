@@ -1,15 +1,41 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Search } from './Search';
 import '@testing-library/jest-dom';
-
-// Mock next/router
-jest.mock('next/router', () => ({
-  useRouter: () => ({
-    push: jest.fn(),
-  }),
-}));
+import * as nextRouter from 'next/router';
+import type { NextRouter } from 'next/router';
 
 describe('Search component', () => {
+  let routerPush: jest.Mock;
+
+  beforeEach(() => {
+    routerPush = jest.fn();
+
+    const mockRouter = {
+      push: routerPush,
+      route: '/',
+      pathname: '/',
+      query: {},
+      asPath: '/',
+      basePath: '',
+      isLocaleDomain: false,
+      isReady: true,
+      isFallback: false,
+      isPreview: false,
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+        emit: jest.fn(),
+      },
+      replace: jest.fn(),
+      reload: jest.fn(),
+      back: jest.fn(),
+      prefetch: jest.fn(),
+      beforePopState: jest.fn(),
+    } as unknown as NextRouter;
+
+    jest.spyOn(nextRouter, 'useRouter').mockReturnValue(mockRouter);
+  });
+
   it('renders input and button', () => {
     render(<Search />);
     expect(screen.getByPlaceholderText('Search...')).toBeInTheDocument();
@@ -17,9 +43,6 @@ describe('Search component', () => {
   });
 
   it('updates input value and triggers search on button click', () => {
-    const routerPush = jest.fn();
-    jest.spyOn(require('next/router'), 'useRouter').mockReturnValue({ push: routerPush });
-
     render(<Search />);
     const input = screen.getByPlaceholderText('Search...');
     const button = screen.getByRole('button', { name: /search/i });
@@ -34,9 +57,6 @@ describe('Search component', () => {
   });
 
   it('triggers search on Enter key press', () => {
-    const routerPush = jest.fn();
-    jest.spyOn(require('next/router'), 'useRouter').mockReturnValue({ push: routerPush });
-
     render(<Search />);
     const input = screen.getByPlaceholderText('Search...');
 
@@ -49,3 +69,5 @@ describe('Search component', () => {
     });
   });
 });
+
+
