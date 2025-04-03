@@ -1,40 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+## 🧪 Next.js Assessment Project
 
-## Getting Started
+### 📦 About
 
-First, run the development server:
+OWLTop is an educational course catalog built with Next.js and React, showcasing a dynamic directory of learning programs sorted by categories and subcategories (e.g., Analytics, Design, Photoshop). Users can search, filter, and view detailed information about courses including price, credit options, reviews, duration, and difficulty.
+
+The platform dynamically generates static pages at build time using getStaticPaths and getStaticProps, optimizing performance and SEO.
+
+This is a production-ready, containerized Next.js application using React 19, TypeScript, and Framer Motion, fully tested with Jest and Testing Library. It includes form management with React Hook Form, and has CI/CD setup with GitHub Actions and Docker Compose.
+
+### 📁 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+src/
+ └── components/         # Shared UI components (Button, Card, Input, etc.)
+ └── context/            # React Context for state management
+ └── helpers/            # Utility functions and constants
+ └── hooks/              # Custom React hooks
+ └── interfaces/         # TypeScript interfaces and types
+ └── layout/             # Layout components (Header, Footer, Sidebar, etc.)
+ └── page-components/    # Components specific to pages
+ └── pages/              # Next.js pages and routes
+ └── styles/             # Global and modular styles
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### ⚙️ Features
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- 🔍 Search: Users can search courses by keywords.
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- 🧭 Sidebar Navigation: Left panel displays hierarchical course categories.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+- 📄 Course Details Page: Includes description, school, diploma, difficulty, and financial details.
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- ⭐ Sorting & Filtering: Courses can be sorted by rating or price.
 
-## Learn More
+- 🧱 Modular Layout with Header, Footer, Sidebar, Menu, etc.
 
-To learn more about Next.js, take a look at the following resources:
+- ⚡ Static Generation of course pages via getStaticPaths and getStaticProps.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+- 💬 Reviews: Course cards display star ratings and number of reviews.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🚀 Getting Started
+Prerequisites
+Node.js v20+
 
-## Deploy on Vercel
+Docker & Docker Compose
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Install & Run Locally
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+```bash
+npm install
+npm run dev
+```
+
+#### Build for Production
+
+```bash
+npm run build
+npm run start
+```
+
+#### 🐳 Docker
+Build Docker Image
+
+```bash
+docker build -t my-app .
+```
+
+#### ✅ Testing
+
+```bash
+npm run test
+```
+
